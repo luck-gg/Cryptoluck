@@ -8,5 +8,5 @@ interface CoinRepository {
 
     suspend fun getCoins(): List<CoinDto>
 
-    suspend fun getCoinsbyId(coinId:String):CoinDetailDto
+    suspend fun getCoinsById(coinId:String):CoinDetailDto
 }
