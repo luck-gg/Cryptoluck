@@ -16,14 +16,14 @@ class GetCoinsUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
         try {
-            this.emit(Resource.Loading())
+            this.emit(Resource.Loading<List<Coin>>())
             val coins = repository.getCoins().map { it.toCoin() } // Transform the List of CoinDTO to a List of coins
             emit(Resource.Success(coins))
         }catch (e: HttpException){
-            /*emit(Resource.Error("test"))*/
-            /*emit(Resource.Error(e.localizedMessage?: "Hubo un error inesperado"))*/
+            emit(Resource.Error<List<Coin>>("test"))
+            emit(Resource.Error<List<Coin>>(e.localizedMessage?: "Hubo un error inesperado"))
         }catch (e: IOException){
-            /*emit(Resource.Error(e.localizedMessage?: "Hubo un error inesperado"))*/
+            emit(Resource.Error<List<Coin>>(e.localizedMessage?: "Hubo un error inesperado"))
         }
     }
 }

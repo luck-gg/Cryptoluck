@@ -14,6 +14,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetCoinUseCase @Inject constructor(
+    //To inject the module with the implementation, so it's easier to test later
     private val repository: CoinRepository
 ) {
     operator fun invoke(coinId : String): Flow<Resource<CoinDetail>> = flow {
