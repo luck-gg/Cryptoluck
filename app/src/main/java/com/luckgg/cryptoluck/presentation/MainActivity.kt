@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.luckgg.cryptoluck.presentation.coin_detail.CoinDetailScreen
 import com.luckgg.cryptoluck.presentation.coin_list.CoinListScreen
-import com.luckgg.cryptoluck.ui.theme.CryptoluckTheme
+import com.luckgg.cryptoluck.presentation.ui.theme.CryptoluckTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
