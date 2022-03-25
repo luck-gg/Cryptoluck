@@ -36,6 +36,7 @@ fun CoinDetailScreen(
         state.coin?.let{coin ->
             LazyColumn(modifier = Modifier.fillMaxSize()){
                 item { 
+                    //Title
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -56,11 +57,13 @@ fun CoinDetailScreen(
                         )
                     }
                     Spacer(modifier = Modifier.height(15.dp))
+                    //Description
                     Text(
                         text = coin.description,
-                        style = MaterialTheme.typography.h2
+                        style = MaterialTheme.typography.body2
                     )
                     Spacer(modifier = Modifier.height(15.dp))
+                    //Tags
                     Text(
                         text = "Tags",
                         style = MaterialTheme.typography.h3
@@ -76,12 +79,14 @@ fun CoinDetailScreen(
                         }
                     }
                     Spacer(modifier = Modifier.height(15.dp))
+                    //Team
                     Text(
                         text = "Team members",
                         style = MaterialTheme.typography.h3
                     )
                     Spacer(modifier = Modifier.height(15.dp))
                 }
+                //Team List
                 items(coin.team){ teamMember ->
                     TeamListItem(teamMember = teamMember,
                         modifier = Modifier
