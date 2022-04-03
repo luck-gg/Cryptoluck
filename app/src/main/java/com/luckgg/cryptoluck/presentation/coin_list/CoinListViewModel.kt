@@ -10,6 +10,7 @@ import com.luckgg.cryptoluck.domain.use_case.get_coins.GetCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel // ViewModel doesn't contains business logic, only keeps state
@@ -25,7 +26,7 @@ class CoinListViewModel @Inject constructor(
     }
 
     private fun getCoins(){
-        getCoinsUseCase().onEach { result ->
+        val coinsFlow = getCoinsUseCase().onEach { result ->
             when(result){
                 is Resource.Success -> {
                     _state.value = CoinListState(coins = result.data ?: emptyList())
@@ -37,6 +38,10 @@ class CoinListViewModel @Inject constructor(
                     _state.value = CoinListState(error = result.message ?: "Un error inesperado ocurrió")
                 }
             }
-        }.launchIn(viewModelScope )
+        }.launchIn(viewModelScope)
+
+
     }
+
+
 }
