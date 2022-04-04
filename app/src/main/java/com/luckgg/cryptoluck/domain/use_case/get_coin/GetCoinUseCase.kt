@@ -18,17 +18,8 @@ class GetCoinUseCase @Inject constructor(
     private val repository: CoinRepository
 ) {
     operator fun invoke(coinId : String): Flow<Resource<CoinDetail>> = flow {
-
-        try {
-            emit(Resource.Loading<CoinDetail>())
-            val coin = repository.getCoinsById(coinId).toCoinDetail()
-            emit(Resource.Success(coin))
-        }
-        catch (e: HttpException){
-            emit(Resource.Error<CoinDetail>(e.localizedMessage?: "Hubo un error inesperado"))
-        }
-        catch (e: IOException){
-            emit(Resource.Error<CoinDetail>(e.localizedMessage?: "Hubo un error inesperado"))
-        }
+        //This is where all business cases are located. Now it only calls the response from the repository
+        val response = repository.getCoinsById(coinId)
+        emit(response)
     }
 }

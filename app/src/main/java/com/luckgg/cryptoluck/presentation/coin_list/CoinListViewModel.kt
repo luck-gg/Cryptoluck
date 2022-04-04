@@ -37,6 +37,7 @@ class CoinListViewModel @Inject constructor(
                 is Resource.Error -> {
                     _state.value = CoinListState(error = result.message ?: "Un error inesperado ocurrió")
                 }
+                else -> CoinListState(error = result.message ?: "Un error completamente inesperado ocurrió")
             }
         }.launchIn(viewModelScope)
 

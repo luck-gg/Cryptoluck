@@ -5,7 +5,9 @@ import com.luckgg.cryptoluck.data.remote.CoinPaprikaAPI
 import com.luckgg.cryptoluck.data.remote.dto.CoinDetailDto
 import com.luckgg.cryptoluck.data.remote.dto.CoinDto
 import com.luckgg.cryptoluck.data.remote.dto.toCoin
+import com.luckgg.cryptoluck.data.remote.dto.toCoinDetail
 import com.luckgg.cryptoluck.domain.model.Coin
+import com.luckgg.cryptoluck.domain.model.CoinDetail
 import com.luckgg.cryptoluck.domain.repository.CoinRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,6 +19,7 @@ import javax.inject.Inject
 class CoinRepositoryImpl @Inject constructor(
     private val api: CoinPaprikaAPI
 ) : CoinRepository {
+
     override suspend fun getCoins(): Resource<List<Coin>> {
         return try {
             val coins = api.getCoins().map { it.toCoin() } // Transform the List of CoinDTO to a List of coins
@@ -28,7 +31,17 @@ class CoinRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCoinsById(coinId: String): CoinDetailDto {
-        return api.getCoinById(coinId)
+    override suspend fun getCoinsById(coinId: String): Resource<CoinDetail> {
+
+        return try {
+            val coin = api.getCoinById(coinId).toCoinDetail()
+            Resource.Success(coin)
+        }
+        catch (e: HttpException){
+            Resource.Error<CoinDetail>(e.localizedMessage?: "Hubo un error inesperado")
+        }
+        catch (e: IOException){
+            Resource.Error<CoinDetail>(e.localizedMessage?: "Hubo un error inesperado")
+        }
     }
 }

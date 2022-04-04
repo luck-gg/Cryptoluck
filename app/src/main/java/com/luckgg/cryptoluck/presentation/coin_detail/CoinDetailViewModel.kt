@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.luckgg.cryptoluck.common.Constants
 import com.luckgg.cryptoluck.common.Resource
 import com.luckgg.cryptoluck.domain.use_case.get_coin.GetCoinUseCase
+import com.luckgg.cryptoluck.presentation.coin_list.CoinListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -40,6 +41,7 @@ class CoinDetailViewModel @Inject constructor(
                 is Resource.Error -> {
                     _state.value = CoinDetailState(error = result.message ?: "Un error inesperado ocurrió")
                 }
+                else -> CoinDetailState(error = result.message ?: "Un error completamente inesperado ocurrió")
             }
         }.launchIn(viewModelScope )
     }

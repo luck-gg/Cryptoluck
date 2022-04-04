@@ -18,7 +18,6 @@ class GetCoinsUseCase @Inject constructor(
 
     operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
         //This is where all business cases are located. Now it only calls the response from the repository
-
         val response = repository.getCoins()
         emit(response)
     }
