@@ -1,6 +1,6 @@
 package com.luckgg.cryptoluck.presentation.coin_list
 
-import com.luckgg.cryptoluck.common.Resource
+
 import com.luckgg.cryptoluck.domain.model.Coin
 
 data class CoinListState(

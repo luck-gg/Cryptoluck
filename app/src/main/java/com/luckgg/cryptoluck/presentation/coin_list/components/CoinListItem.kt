@@ -10,10 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.luckgg.cryptoluck.domain.model.Coin
 
@@ -30,10 +33,17 @@ fun CoinListItem(
             .padding(20.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+
         Text(
             text = "${coin.rank}. ${coin.name} (${coin.symbol})",
             style = MaterialTheme.typography.body1,
             overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = if (coin.isNew) "NEW!" else "",
+            style = MaterialTheme.typography.body2,
+            modifier = Modifier.align(CenterVertically),
+            color = Green
         )
         Text(
             text = if (coin.isActive) "active" else "inactive",
